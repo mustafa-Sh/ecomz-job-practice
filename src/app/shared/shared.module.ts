@@ -10,6 +10,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 @NgModule({
   imports: [
@@ -24,7 +26,9 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     FlexLayoutModule,
     MatSortModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatToolbarModule
   ],
   declarations: [
   ],
@@ -40,7 +44,9 @@ import { MatInputModule } from '@angular/material/input';
     MatPaginatorModule,
     FlexLayoutModule,
     MatSortModule,
-    MatInputModule
+    MatInputModule,
+    MatTabsModule,
+    MatToolbarModule
   ]
 })
 export class SharedModule {}
