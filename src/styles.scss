@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
+.mobile-label {
+  display: none;
+}
+
+@media(max-width: 600px) {
+  .mobile-label {
+    width: 80px;
+    display: inline-block;
+    font-weight: bold;
+  }
+
+  .mat-header-row {
+    display: none !important;
+  }
+
+  .mat-row {
+    flex-direction: column;
+    align-items: start;
+    padding: 8px 24px;
+  }
+
+  .no-padding {
+    padding-left: 0 !important;
+  }
+}
+
+.mat-row .mat-icon-button {
+  display: none !important;
+}
+
+.mat-row:hover .mat-icon-button {
+  display: block !important;
+}

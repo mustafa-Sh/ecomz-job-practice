@@ -1,1 +1,51 @@
-<p>customers works!</p>
+<div fxLayout="column">
+  <div class="flex-p">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <mat-header-cell fxFlex="25%" *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-cell fxFlex="25%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> Name:</span>
+          {{element.name}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="country">
+        <mat-header-cell fxFlex="20%" *matHeaderCellDef mat-sort-header> Country </mat-header-cell>
+        <mat-cell fxFlex="20%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> Country:</span>
+          {{element.country}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="city">
+        <mat-header-cell fxFlex="25%" *matHeaderCellDef mat-sort-header> City </mat-header-cell>
+        <mat-cell fxFlex="25%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> City:</span>
+          {{element.city}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="street">
+        <mat-header-cell fxFlex="25%" *matHeaderCellDef mat-sort-header> Street </mat-header-cell>
+        <mat-cell fxFlex="25%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> Street:</span>
+          {{element.street}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="id" stickyEnd>
+        <mat-header-cell fxFlex="5%" *matHeaderCellDef></mat-header-cell>
+        <mat-cell fxFlex="5%" *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+              <span (mouseleave)="menuTrigger.closeMenu()">
+              </span>
+          </mat-menu>
+      </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+  </div>
+</div>
