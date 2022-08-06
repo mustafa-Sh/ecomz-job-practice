@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatMenuModule,
     MatPaginatorModule,
     FlexLayoutModule,
-    MatSortModule
+    MatSortModule,
+    MatInputModule
   ],
   declarations: [
   ],
@@ -37,7 +39,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatMenuModule,
     MatPaginatorModule,
     FlexLayoutModule,
-    MatSortModule
+    MatSortModule,
+    MatInputModule
   ]
 })
 export class SharedModule {}

@@ -41,4 +41,8 @@ export class CabsComponent implements OnInit {
     });
   }
 
+  applyFilter(event: any): void {
+    this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  }
+
 }
