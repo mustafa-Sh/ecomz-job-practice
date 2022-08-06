@@ -1,1 +1,44 @@
-<p>cabs works!</p>
+<div fxLayout="column">
+  <div class="flex-p">
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="owner">
+        <mat-header-cell fxFlex="35%" *matHeaderCellDef mat-sort-header> Owner </mat-header-cell>
+        <mat-cell fxFlex="35%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> Owner:</span>
+          {{element.owner}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="model">
+        <mat-header-cell fxFlex="25%" *matHeaderCellDef mat-sort-header> Model </mat-header-cell>
+        <mat-cell fxFlex="25%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> Model:</span>
+          {{element.model}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="number">
+        <mat-header-cell fxFlex="35%" *matHeaderCellDef mat-sort-header> Number </mat-header-cell>
+        <mat-cell fxFlex="35%" class="no-padding" *matCellDef="let element">
+          <span class="mobile-label"> Number:</span>
+          {{element.number}}
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="menu" stickyEnd>
+        <mat-header-cell fxFlex="5%" *matHeaderCellDef></mat-header-cell>
+        <mat-cell fxFlex="5%" *matCellDef="let element">
+          <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" xPosition="before">
+              <span (mouseleave)="menuTrigger.closeMenu()">
+              </span>
+          </mat-menu>
+      </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"> </mat-paginator>
+  </div>
+</div>

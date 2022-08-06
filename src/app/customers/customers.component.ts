@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
 import { DataStorageService } from '../shared/data-storage.service';
@@ -10,9 +11,10 @@ import { DataStorageService } from '../shared/data-storage.service';
   styleUrls: ['./customers.component.scss']
 })
 export class CustomersComponent implements OnInit {
-  public displayedColumns = ['name', 'country', 'city', 'street', 'id'];
+  public displayedColumns = ['name', 'country', 'city', 'street', 'menu'];
   dataSource = new MatTableDataSource();
   isLoading = false;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private dataStorage: DataStorageService) {
@@ -20,15 +22,16 @@ export class CustomersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isLoading = true;
+    this.sort.sort(({ id: 'name', start: 'asc'}) as MatSortable);
     this.loadData();
   }
 
   loadData(): void {
+    this.isLoading = true;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.dataStorage.getCustomers().subscribe({
       next: (result) => {
-        console.log(result);
         this.dataSource.data = result.map(customer => {
           return {
             id: customer.id,
