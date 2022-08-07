@@ -1,0 +1,30 @@
+<app-loader [isLoading]="isLoading">
+</app-loader>
+<h1 mat-dialog-title>Edit Customer</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+    <div fxLayout="column">
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input type="text" matInput autocomplete="off" placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input type="text" matInput autocomplete="off" placeholder="Country" formControlName="country">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10px">
+        <mat-form-field fxFlex>
+          <input type="text" matInput autocomplete="off" placeholder="City" formControlName="city">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input type="text" matInput autocomplete="off" placeholder="Street" formControlName="street">
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+  <button mat-raised-button color="primary" (click)="submit()" [disabled]="!form.valid"><span>Save</span></button>
+  <button mat-raised-button color="warn" (click)="close(undefined)">Cancel</button>
+</div>

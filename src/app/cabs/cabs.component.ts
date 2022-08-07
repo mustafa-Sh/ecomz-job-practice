@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { DataStorageService } from '../shared/data-storage.service';
-
+import { CabsDialogAddComponent } from './cabs-dialog-add/cabs-dialog-add.component';
+import { Cab } from '../models/cab.module';
+import { CabsDialogEditComponent } from './cabs-dialog-edit/cabs-dialog-edit.component';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { CabService } from './cab.service';
 
 @Component({
   selector: 'app-cabs',
@@ -18,7 +22,8 @@ export class CabsComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private dataStorage: DataStorageService) { }
+  constructor(private cabService: CabService,
+              public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.sort.sort(({ id: 'owner', start: 'asc'}) as MatSortable);
@@ -29,7 +34,7 @@ export class CabsComponent implements OnInit {
     this.isLoading = true;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.dataStorage.getCabs().subscribe({
+    this.cabService.getCabs().subscribe({
       next: (result) => {
         this.dataSource.data = result;
         this.isLoading = false;
@@ -43,6 +48,55 @@ export class CabsComponent implements OnInit {
 
   applyFilter(event: any): void {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  }
+
+  openAddCab() {
+    this.dialog.open(CabsDialogAddComponent, {disableClose: true})
+    .afterClosed()
+    .subscribe((data) => {
+      if (data) {
+        this.loadData();
+      }
+    });
+  }
+
+  editCab(element: Cab) {
+    this.dialog.open(CabsDialogEditComponent, {
+      disableClose: true,
+      data: element
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      if (data) {
+        this.loadData();
+      }
+    });
+  }
+
+  deleteCab(element: Cab) {
+    this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      data: {title: 'Are you sure you want to delete this cab?'}
+    }).afterClosed()
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.isLoading = true;
+            this.cabService.deleteCab(element.id)
+              .subscribe({
+                next: (result) => {
+                  console.log(result);
+                  this.loadData();
+                  this.isLoading = false;
+                },
+                error: (err) => {
+                  console.log(err);
+                  this.isLoading = false;
+                }
+              });
+          }
+        }
+      })
   }
 
 }

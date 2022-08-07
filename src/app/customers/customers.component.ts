@@ -1,9 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 
-import { DataStorageService } from '../shared/data-storage.service';
+import { CustomerDialogAddComponent } from './customer-dialog-add/customer-dialog-add.component';
+import { Customer } from '../models/customer.model';
+import { ConfirmDialogComponent } from '../shared/confirm-dialog/confirm-dialog.component';
+import { CustomerDialogEditComponent } from './customer-dialog-edit/customer-dialog-edit.component';
+import { CustomerService } from './customer.service';
 
 @Component({
   selector: 'app-customers',
@@ -17,7 +22,8 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  constructor(private dataStorage: DataStorageService) {
+  constructor(private customerService: CustomerService,
+              public dialog: MatDialog) {
 
   }
 
@@ -30,8 +36,9 @@ export class CustomersComponent implements OnInit {
     this.isLoading = true;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.dataStorage.getCustomers().subscribe({
+    this.customerService.getCustomers().subscribe({
       next: (result) => {
+        console.log(result);
         this.dataSource.data = result.map(customer => {
           return {
             id: customer.id,
@@ -52,6 +59,56 @@ export class CustomersComponent implements OnInit {
 
   applyFilter(event: any): void {
     this.dataSource.filter = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  }
+
+  openAddCustomer() {
+    this.dialog.open(CustomerDialogAddComponent, {disableClose: true})
+      .afterClosed()
+      .subscribe((data) => {
+        if (data) {
+          this.loadData();
+        }
+    });
+  }
+
+  editCustomer(element: Customer) {
+    this.dialog.open(CustomerDialogEditComponent, {
+      disableClose: true,
+      data: element
+    })
+    .afterClosed()
+    .subscribe((data) => {
+      if (data) {
+        this.loadData();
+      }
+    });
+  }
+
+  deleteCustomer(element: Customer) {
+    console.log(element)
+    this.dialog.open(ConfirmDialogComponent, {
+      disableClose: true,
+      data: {title: 'Are you sure you want to delete this customer?'}
+    }).afterClosed()
+      .subscribe({
+        next: (response) => {
+          if (response) {
+            this.isLoading = true;
+            this.customerService.deleteCustomer(element.id)
+              .subscribe({
+                next: (result) => {
+                  console.log(result);
+                  this.loadData();
+                  this.isLoading = false;
+                },
+                error: (err) => {
+                  console.log(err);
+                  this.isLoading = false;
+                }
+              });
+          }
+        }
+      })
   }
 
 }

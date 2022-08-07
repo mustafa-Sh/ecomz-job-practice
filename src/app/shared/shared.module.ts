@@ -11,7 +11,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import { LoaderComponent } from './loader/loader.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   imports: [
@@ -28,9 +34,14 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatSortModule,
     MatInputModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule
   ],
   declarations: [
+    LoaderComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     CommonModule,
@@ -46,7 +57,12 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     MatSortModule,
     MatInputModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatDialogModule,
+    MatButtonToggleModule,
+    LoaderComponent,
+    MatProgressSpinnerModule,
+    ConfirmDialogComponent
   ]
 })
 export class SharedModule {}

@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { CustomersComponent } from './customers.component';
+import { CustomerDialogAddComponent } from './customer-dialog-add/customer-dialog-add.component';
+import { CustomerDialogEditComponent } from './customer-dialog-edit/customer-dialog-edit.component';
 
 export const routes: Routes = [
   { path: '', component: CustomersComponent, pathMatch: 'full' }
@@ -18,7 +20,9 @@ export const routes: Routes = [
     SharedModule
   ],
   declarations: [
-    CustomersComponent
+    CustomersComponent,
+    CustomerDialogAddComponent,
+    CustomerDialogEditComponent
   ]
 })
 export class CustomersModule { }
