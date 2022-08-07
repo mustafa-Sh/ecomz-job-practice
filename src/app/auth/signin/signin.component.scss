@@ -1,0 +1,19 @@
+mat-form-field {
+  width: 100%;
+  min-width: 300px;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.signin__margin {
+  margin-top: 100px;
+}

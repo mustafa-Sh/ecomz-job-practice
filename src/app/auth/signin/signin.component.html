@@ -1,1 +1,25 @@
-<p>signin works!</p>
+<app-loader [isLoading]="isLoading">
+</app-loader>
+<div fxLayout="row" fxLayoutAlign="center center" class="h-100" class="signin__margin">
+  <form [formGroup]="form" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+    <mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z12 box-content-inner">
+      <mat-card-title>Sign In</mat-card-title>
+      <mat-form-field class="w-100">
+          <input matInput autocomplete="off" placeholder="Username" required formControlName="username">
+          <mat-error *ngIf="form.controls['username'].errors?.['required']">Username is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="w-100">
+          <input matInput autocomplete="off" placeholder="Password" required [type]="passwordHide ? 'password' : 'text'"
+                 formControlName="password" autocomplete="current-password">
+          <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="form.controls['password'].errors?.['required']">Password is required</mat-error>
+          <mat-error *ngIf="form.controls['password'].hasError('minlength')">Password isn't long enough,
+              minimum of 6 characters
+          </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="mat-elevation-z12 box-button" (click)="submit()" [disabled]="!form.valid">
+        SIGN IN
+      </button>
+  </mat-card>
+  </form>
+</div>

@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatCardModule } from '@angular/material/card';
 
 import { LoaderComponent } from './loader/loader.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -37,7 +38,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatToolbarModule,
     MatDialogModule,
     MatButtonToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatCardModule
   ],
   declarations: [
     LoaderComponent,
@@ -62,7 +64,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonToggleModule,
     LoaderComponent,
     MatProgressSpinnerModule,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    MatCardModule
   ]
 })
 export class SharedModule {}

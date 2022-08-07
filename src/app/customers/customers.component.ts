@@ -38,7 +38,6 @@ export class CustomersComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.customerService.getCustomers().subscribe({
       next: (result) => {
-        console.log(result);
         this.dataSource.data = result.map(customer => {
           return {
             id: customer.id,
