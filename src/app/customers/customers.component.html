@@ -1,4 +1,4 @@
-<div fxLayout="row" class="flex-p">
+<div fxLayout="row" class="flex-p" fxLayoutGap="30px">
   <div fxFlex="10">
     <mat-button-toggle-group #controls="matButtonToggleGroup">
       <mat-button-toggle value="add" (click)="openAddCustomer()">
@@ -8,7 +8,7 @@
   </div>
   <div fxFlex="25">
     <mat-form-field fxFlex>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+      <input matInput autocomplete="off" (keyup)="applyFilter($event)" placeholder="Filter">
     </mat-form-field>
   </div>
 </div>

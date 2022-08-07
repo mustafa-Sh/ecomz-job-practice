@@ -14,3 +14,23 @@ span {
   padding-right: 1rem;
   cursor: pointer;
 }
+
+// If the browser window is 500px or smaller
+@media only screen and (max-width: 500px) {
+  .header-desktop-form {
+    display: none;
+  }
+  .header-mobile-form {
+    display: block;
+  }
+}
+
+// If the browser window is 500px or greater
+@media only screen and (min-width: 500px) {
+  .header-desktop-form {
+    display: block;
+  }
+  .header-mobile-form {
+    display: none;
+  }
+}

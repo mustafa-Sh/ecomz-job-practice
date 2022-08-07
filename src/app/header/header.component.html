@@ -1,10 +1,24 @@
 <mat-toolbar color="primary" class="toolbar">
   <h2>Ecomz Real Job Practice</h2>
-  <div>
-    <span routerLink="/">Customers</span>
-    <span routerLink="/cabs">Cabs</span>
+  <div class="header-desktop-form">
+    <span (click)="nagigateToCustomers()">Customers</span>
+    <span (click)="nagigateToCabs()">Cabs</span>
     <button mat-raised-button color="basic" class="mat-elevation-z12 box-button" (click)="logout()">
       Logout
     </button>
   </div>
+  <button class="header-mobile-form" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <span (click)="nagigateToCustomers()">Customers</span>
+    </button>
+    <button mat-menu-item>
+      <span (click)="nagigateToCabs()">Cabs</span>
+    </button>
+    <button mat-menu-item>
+      <span (click)="logout()">Logout</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
