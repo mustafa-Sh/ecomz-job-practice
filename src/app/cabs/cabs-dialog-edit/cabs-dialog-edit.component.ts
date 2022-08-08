@@ -40,7 +40,6 @@ export class CabsDialogEditComponent implements OnInit {
     this.isLoading = true;
     this.cabService.editCab(cab).subscribe({
       next: (result) => {
-        console.log('success', result);
         this.isLoading = false;
         this.close(cab);
       },

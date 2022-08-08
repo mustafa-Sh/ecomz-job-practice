@@ -85,7 +85,6 @@ export class CabsComponent implements OnInit {
             this.cabService.deleteCab(element.id)
               .subscribe({
                 next: (result) => {
-                  console.log(result);
                   this.loadData();
                   this.isLoading = false;
                 },

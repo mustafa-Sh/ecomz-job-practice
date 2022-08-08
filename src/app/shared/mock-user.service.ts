@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { USER } from '../models/user.mocks';
+import { USER } from '../mocks/user.mocks';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,9 @@ export class MockUserService {
       setTimeout(async () => {
         if (username === USER.username && password === USER.password) {
           const token = this.makejwt();
+          USER.token = token;
           observer.next({
-            token
+            ...USER
           });
           observer.complete();
         } else {
@@ -51,6 +52,10 @@ export class MockUserService {
 
   setToken(token: string) {
     localStorage.setItem('token', token);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
   removeToken() {

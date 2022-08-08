@@ -35,7 +35,6 @@ export class CabsDialogAddComponent implements OnInit {
     this.isLoading = true;
     this.cabService.addCab(cab).subscribe({
       next: (result) => {
-        console.log('success', result);
         this.isLoading = false;
         this.close(cab);
       },

@@ -39,7 +39,6 @@ export class CustomerDialogAddComponent implements OnInit {
     this.isLoading = true;
     this.customerService.addCustomer(customer).subscribe({
       next: (result) => {
-        console.log('success', result);
         this.isLoading = false;
         this.close(customer);
       },

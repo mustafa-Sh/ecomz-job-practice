@@ -84,7 +84,6 @@ export class CustomersComponent implements OnInit {
   }
 
   deleteCustomer(element: Customer) {
-    console.log(element)
     this.dialog.open(ConfirmDialogComponent, {
       disableClose: true,
       data: {title: 'Are you sure you want to delete this customer?'}
@@ -96,7 +95,6 @@ export class CustomersComponent implements OnInit {
             this.customerService.deleteCustomer(element.id)
               .subscribe({
                 next: (result) => {
-                  console.log(result);
                   this.loadData();
                   this.isLoading = false;
                 },
