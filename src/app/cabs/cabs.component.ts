@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CabsDialogAddComponent } from './cabs-dialog-add/cabs-dialog-add.component';
 import { Cab } from '../models/cab.module';
@@ -23,7 +24,8 @@ export class CabsComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private cabService: CabService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              public snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.sort.sort(({ id: 'owner', start: 'asc'}) as MatSortable);
@@ -40,7 +42,7 @@ export class CabsComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.log(err);
+        this.snackBar.open(err);
         this.isLoading = false;
       }
     });
@@ -89,7 +91,7 @@ export class CabsComponent implements OnInit {
                   this.isLoading = false;
                 },
                 error: (err) => {
-                  console.log(err);
+                  this.snackBar.open(err);
                   this.isLoading = false;
                 }
               });

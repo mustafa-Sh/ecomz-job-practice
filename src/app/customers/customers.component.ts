@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CustomerDialogAddComponent } from './customer-dialog-add/customer-dialog-add.component';
 import { Customer } from '../models/customer.model';
@@ -23,7 +24,8 @@ export class CustomersComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(private customerService: CustomerService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              public snackBar: MatSnackBar) {
 
   }
 
@@ -50,7 +52,7 @@ export class CustomersComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.log(err);
+        this.snackBar.open(err);
         this.isLoading = false;
       }
     });
@@ -99,7 +101,7 @@ export class CustomersComponent implements OnInit {
                   this.isLoading = false;
                 },
                 error: (err) => {
-                  console.log(err);
+                  this.snackBar.open(err);
                   this.isLoading = false;
                 }
               });

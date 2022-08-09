@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+.error-message {
+  padding-bottom: 10px;
+  color: red;
+}
+
 .mat-table {
   overflow: auto;
   max-height: 500px;

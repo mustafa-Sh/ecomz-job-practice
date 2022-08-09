@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CabService } from '../cab.service';
 
@@ -15,6 +16,7 @@ export class CabsDialogAddComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CabsDialogAddComponent>,
               public fb: FormBuilder,
+              public snackBar: MatSnackBar,
               private cabService: CabService) {
     this.form = this.fb.group({
       owner: ['', Validators.required],
@@ -34,12 +36,12 @@ export class CabsDialogAddComponent implements OnInit {
     }
     this.isLoading = true;
     this.cabService.addCab(cab).subscribe({
-      next: (result) => {
+      next: () => {
         this.isLoading = false;
         this.close(cab);
       },
       error: (err) => {
-        console.log('err', err);
+        this.snackBar.open(err);
         this.isLoading = false;
       }
     });

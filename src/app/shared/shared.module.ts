@@ -16,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 import { LoaderComponent } from './loader/loader.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -39,7 +40,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatDialogModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   declarations: [
     LoaderComponent,
@@ -65,7 +67,11 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     LoaderComponent,
     MatProgressSpinnerModule,
     ConfirmDialogComponent,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
+  ],
+  providers: [
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
   ]
 })
 export class SharedModule {}

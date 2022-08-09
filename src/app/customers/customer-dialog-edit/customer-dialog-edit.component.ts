@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { Customer } from '../../models/customer.model';
 import { CustomerService } from '../customer.service';
@@ -18,6 +19,7 @@ export class CustomerDialogEditComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<CustomerDialogEditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               public fb: FormBuilder,
+              public snackBar: MatSnackBar,
               private customerService: CustomerService) {
     this.customer = data;
     this.form = this.fb.group({
@@ -44,12 +46,12 @@ export class CustomerDialogEditComponent implements OnInit {
     }
     this.isLoading = true;
     this.customerService.editCustomer(customer).subscribe({
-      next: (result) => {
+      next: () => {
         this.isLoading = false;
         this.close(customer);
       },
       error: (err) => {
-        console.log('err', err);
+        this.snackBar.open(err);
         this.isLoading = false;
       }
     });

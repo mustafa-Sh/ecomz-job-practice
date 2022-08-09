@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { USER } from '../mocks/user.mocks';
+import { LOGINREQUEST } from '../mocks/loginRequest.mocks';
+import { User } from '../models/user.model';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +16,15 @@ export class MockUserService {
   signin(username: string, password: string) {
     const myObservable = new Observable((observer) => {
       setTimeout(async () => {
-        if (username === USER.username && password === USER.password) {
+        if (username === LOGINREQUEST.username && password === LOGINREQUEST.password) {
           const token = this.makejwt();
-          USER.token = token;
+          const user = new User('91c4abfc699c3', username, 'mustafa@gmail.com', token);
           observer.next({
-            ...USER
+            ...user
           });
           observer.complete();
         } else {
-          observer.error('Username or password is incorrect');
+          observer.error('INVALID_PASSWORD_OR_EMAIL');
           observer.complete();
         }
       }, 2000);

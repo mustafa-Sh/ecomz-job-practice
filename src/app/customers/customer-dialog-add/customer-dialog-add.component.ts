@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CustomerService } from '../customer.service';
 
@@ -15,6 +16,7 @@ export class CustomerDialogAddComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<CustomerDialogAddComponent>,
               public fb: FormBuilder,
+              public snackBar: MatSnackBar,
               private customerService: CustomerService) {
     this.form = this.fb.group({
       name: ['', Validators.required],
@@ -38,12 +40,12 @@ export class CustomerDialogAddComponent implements OnInit {
     }
     this.isLoading = true;
     this.customerService.addCustomer(customer).subscribe({
-      next: (result) => {
+      next: () => {
         this.isLoading = false;
         this.close(customer);
       },
       error: (err) => {
-        console.log('err', err);
+        this.snackBar.open(err);
         this.isLoading = false;
       }
     });

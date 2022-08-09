@@ -14,6 +14,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public passwordHide = true;
   isLoading = false;
+  error: string = '';
   signinSubscription: Subscription;
 
   constructor(public fb: FormBuilder,
@@ -29,6 +30,7 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   submit() {
+    this.error = '';
     this.isLoading = true;
     const username = this.form.get('username')?.value;
     const password = this.form.get('password')?.value;
@@ -36,10 +38,11 @@ export class SigninComponent implements OnInit, OnDestroy {
       .subscribe({
         next: () => {
           this.isLoading = false;
+          this.error = '';
           this.router.navigate(['/']);
         },
-        error: (err) => {
-          console.log(err);
+        error: (errorMessage) => {
+          this.error = errorMessage;
           this.isLoading = false;
         }
       });
