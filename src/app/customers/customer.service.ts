@@ -4,7 +4,7 @@ import { catchError } from 'rxjs';
 
 import { environment } from '../../environments/environment';
 import { Customer } from '../models/customer.model';
-import { ErrorsHandlingService } from '../shared/errors-handling.service';
+import { ErrorsHandlingService } from '../shared/services/errors-handling.service';
 
 @Injectable({
   providedIn: 'root'

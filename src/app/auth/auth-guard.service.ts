@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import { map, Observable, take, tap } from 'rxjs';
 
-import { MockUserService } from '../shared/mock-user.service';
+import { MockUserService } from '../shared/services/mock-user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
     if (token) {
       return true;
     } else {
-      this.router.navigate(['/signin']);
+      this.router.navigate(['/auth']);
       return false;
     }
   }

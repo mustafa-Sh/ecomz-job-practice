@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHandler, HttpInterceptor, HttpParams, HttpRequest } from '@angular/common/http';
-import { exhaustMap, take } from 'rxjs';
 
-import { MockUserService } from './shared/mock-user.service';
+import { MockUserService } from './shared/services/mock-user.service';
 
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {

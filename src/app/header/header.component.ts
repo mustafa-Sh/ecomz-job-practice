@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
       .subscribe({
         next: () => {
           this.isLoading = false;
-          this.router.navigate(['/signin']);
+          this.router.navigate(['/auth']);
         },
         error: (err) => {
           console.log(err);

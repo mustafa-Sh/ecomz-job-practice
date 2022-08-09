@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { LOGINREQUEST } from '../mocks/loginRequest.mocks';
-import { User } from '../models/user.model';
+import { LOGINREQUEST } from '../../mocks/loginRequest.mocks';
+import { User } from '../../models/user.model';
 
 
 @Injectable({

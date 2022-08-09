@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-import { MockUserService } from '../shared/mock-user.service';
+import { MockUserService } from '../shared/services/mock-user.service';
 
 @Injectable({
   providedIn: 'root'
