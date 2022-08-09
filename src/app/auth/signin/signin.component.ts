@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-signin',
@@ -16,6 +17,8 @@ export class SigninComponent implements OnInit, OnDestroy {
   isLoading = false;
   error: string = '';
   signinSubscription: Subscription;
+  captcha: string = '';
+  siteKey = environment.recaptchaKey;
 
   constructor(public fb: FormBuilder,
               private authService: AuthService,
@@ -27,6 +30,10 @@ export class SigninComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+  }
+
+  resolved(captchaResponse: string): void {
+    this.captcha = captchaResponse;
   }
 
   submit() {

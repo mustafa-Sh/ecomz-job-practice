@@ -17,6 +17,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 import { LoaderComponent } from './loader/loader.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -41,7 +42,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RecaptchaModule
   ],
   declarations: [
     LoaderComponent,
@@ -68,7 +70,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MatProgressSpinnerModule,
     ConfirmDialogComponent,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    RecaptchaModule
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }

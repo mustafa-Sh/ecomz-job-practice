@@ -1,6 +1,9 @@
 <app-loader [isLoading]="isLoading">
 </app-loader>
-<div fxLayout="row" fxLayoutAlign="center center" class="h-100" class="signin__margin">
+<div *ngIf="!captcha" class="recaptcha">
+  <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey"></re-captcha>
+</div>
+<div *ngIf="captcha" fxLayout="row" fxLayoutAlign="center center" class="h-100" class="signin__margin">
   <form [formGroup]="form" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
     <mat-card fxLayout="column" fxLayoutAlign="center center" class="mat-elevation-z12 box-content-inner">
       <mat-card-title>Sign In</mat-card-title>
