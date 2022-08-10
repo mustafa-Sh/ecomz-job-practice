@@ -2,14 +2,14 @@
 </app-loader>
 <mat-toolbar color="primary" class="toolbar">
   <h2>Ecomz Real Job Practice</h2>
-  <div class="header-desktop-form">
+  <div *ngIf="isAuthenticated" class="header-desktop-form">
     <span (click)="nagigateToCustomers()">Customers</span>
     <span (click)="nagigateToCabs()">Cabs</span>
     <button mat-raised-button color="basic" class="mat-elevation-z12 box-button" (click)="signout()">
       Sign Out
     </button>
   </div>
-  <button class="header-mobile-form" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <button *ngIf="isAuthenticated" class="header-mobile-form" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">

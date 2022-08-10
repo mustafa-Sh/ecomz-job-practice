@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { MockUserService } from '../shared/services/mock-user.service';
@@ -8,6 +8,7 @@ import { MockUserService } from '../shared/services/mock-user.service';
   providedIn: 'root'
 })
 export class AuthService {
+  isAuthenticated = new Subject();
 
   constructor(private mockUserService: MockUserService) {
   }
@@ -15,6 +16,7 @@ export class AuthService {
   signin(username: string, password: string): Observable<any> {
     return this.mockUserService.signin(username, password).pipe(map((user: any) => {
       if (user.token) {
+        this.isAuthenticated.next(true);
         this.mockUserService.setToken(user.token);
       }
     }), catchError(this.handleError));
@@ -32,7 +34,9 @@ export class AuthService {
 
   signout(): Observable<any> {
     return this.mockUserService.signout().pipe(map(() => {
+      this.isAuthenticated.next(false);
       this.mockUserService.removeToken();
     }));
   }
+
 }
